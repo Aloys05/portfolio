@@ -391,7 +391,7 @@ background-color: var(--second-bg-color);
 
 .project-box{
 display: grid;
-grid-template-columns: repeat(3, 1fr);
+grid-template-columns: repeat(2, 1fr);
 gap: 2.5rem;
 max-width: 1100px;
 margin: 0 auto;
