@@ -1,39 +1,4 @@
 
-index.html
-index.html
-304 lines
-HTML
-style.css
-style.css
-576 lines
-CSS
-can you fic this so the columns of the Programming language and skills a separate and work together like not work together but their own responsiveness instead of them being connected
-
-Ran 2 commands, edited 2 files, viewed a file
-Everything's consistent now — good. Now let me copy the fixed files to the outputs folder.
-
-Ran a command, read a file
-Found the actual bug: your "My Skills" section and your "Programming Languages" section were both using id="projects" and the classes .project-box / .project-card. Since the Programming Languages CSS rules came later in the stylesheet, they overwrote the Skills section's grid/padding — so both sections were forced to share one layout (a fixed 2-column grid with huge 4rem 12rem padding), and neither could resize independently.
-
-What I changed:
-
-HTML: renamed the Programming Languages section to its own id="languages" / class="languages", with .language-box and .language-card for its inner divs. The Skills section keeps .project-box / .project-card untouched.
-CSS: split the shared rules into two separate, independent rule sets — .project-box/.project-card for Skills, .language-box/.language-card for Languages — so editing one no longer touches the other.
-Gave Languages a sane grid (3 columns → 2 on tablets → 1 on phones) with its own media queries, and toned down that oversized 12rem padding to 2rem so cards aren't squished.
-Both grids now behave and resize completely on their own.
-
-
-Index
-Code·HTML 
-
-Style
-Code·CSS 
-
-Write a message…
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-Style · CSS
 *{
   margin: 0;
   padding: 0;
