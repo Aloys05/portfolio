@@ -1,3 +1,39 @@
+
+index.html
+index.html
+304 lines
+HTML
+style.css
+style.css
+576 lines
+CSS
+can you fic this so the columns of the Programming language and skills a separate and work together like not work together but their own responsiveness instead of them being connected
+
+Ran 2 commands, edited 2 files, viewed a file
+Everything's consistent now — good. Now let me copy the fixed files to the outputs folder.
+
+Ran a command, read a file
+Found the actual bug: your "My Skills" section and your "Programming Languages" section were both using id="projects" and the classes .project-box / .project-card. Since the Programming Languages CSS rules came later in the stylesheet, they overwrote the Skills section's grid/padding — so both sections were forced to share one layout (a fixed 2-column grid with huge 4rem 12rem padding), and neither could resize independently.
+
+What I changed:
+
+HTML: renamed the Programming Languages section to its own id="languages" / class="languages", with .language-box and .language-card for its inner divs. The Skills section keeps .project-box / .project-card untouched.
+CSS: split the shared rules into two separate, independent rule sets — .project-box/.project-card for Skills, .language-box/.language-card for Languages — so editing one no longer touches the other.
+Gave Languages a sane grid (3 columns → 2 on tablets → 1 on phones) with its own media queries, and toned down that oversized 12rem padding to 2rem so cards aren't squished.
+Both grids now behave and resize completely on their own.
+
+
+Index
+Code·HTML 
+
+Style
+Code·CSS 
+
+Write a message…
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Style · CSS
 *{
   margin: 0;
   padding: 0;
@@ -385,19 +421,19 @@ section{
 PROGRAMMING LANGUAGES
 ========================= */
 
-.projects{
+.languages{
 background-color: var(--second-bg-color);
 }
 
-.project-box{
+.language-box{
 display: grid;
-grid-template-columns: repeat(2, 1fr);
+grid-template-columns: repeat(3, 1fr);
 gap: 2.5rem;
 max-width: 1100px;
 margin: 0 auto;
 }
 
-.project-card{
+.language-card{
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -406,21 +442,21 @@ text-align: center;
 background-color: var(--bg-color);
 border: 2px solid var(--main-color);
 border-radius: 3rem;
-padding: 4rem 12rem;
-min-height: 260px;
+padding: 3rem 2rem;
+min-height: 220px;
 cursor: pointer;
 box-shadow: 0 0 5px var(--main-color);
 transition: 0.3s ease-in-out;
 }
 
-.project-card:hover{
+.language-card:hover{
 box-shadow: 0 0 25px var(--main-color),
 0 0 50px var(--main-color),
 0 0 100px var(--main-color);
 transform: scale(1.03);
 }
 
-.project-card h3{
+.language-card h3{
 font-size: 2.8rem;
 color: var(--text-color);
 margin-top: 1.5rem;
@@ -432,9 +468,21 @@ color: var(--main-color);
 transition: 0.3s ease-in-out;
 }
 
-.project-card:hover .language-icon{
+.language-card:hover .language-icon{
 transform: scale(1.1);
 text-shadow: 0 0 25px var(--main-color);
+}
+
+@media (max-width: 768px){
+  .language-box{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px){
+  .language-box{
+    grid-template-columns: 1fr;
+  }
 }
 
 
